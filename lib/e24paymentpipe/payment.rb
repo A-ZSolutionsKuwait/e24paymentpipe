@@ -15,13 +15,13 @@ module E24PaymentPipe
       amt
     )
 
-    def initialize(amount, track_id, currency_code: "414")
-      @settings = E24PaymentPipe.settings.merge(
-        amt: amount.to_s,
-        track_id: track_id.to_s,
-        currency_code: currency_code,
-        action: "1"
-      )
+    def initialize(amount, track_id, options={})
+      options[:amt] = amount
+      options[:track_id] = track_id
+      options[:currency_code] ||= "414"
+      options[:action] ||= "1"
+
+      @settings = E24PaymentPipe.settings.merge(options)
 
       settings_error(MANDATORY)
       @response = respond_from_securce_settings(@settings)
