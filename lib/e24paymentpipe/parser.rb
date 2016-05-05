@@ -1,7 +1,7 @@
 require "rexml/document"
-include REXML
 
 module E24PaymentPipe
+  include REXML
   
   # Parser support for income and outcome data.
   
